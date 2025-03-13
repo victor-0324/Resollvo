@@ -1,0 +1,1149 @@
+{% extends 'partials/base.html' %}
+{% block title %} Dashboard {% endblock title %}
+
+{% block extra_css %}
+
+<!-- jsvectormap css -->
+<link href="{{url_for('static', filename='libs/jsvectormap/css/jsvectormap.min.css')}}" rel="stylesheet"
+    type="text/css">
+
+<!--Swiper slider css-->
+<link href="{{url_for('static', filename='libs/swiper/swiper-bundle.min.css')}}" rel="stylesheet" type="text/css">
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0">Listing Grid</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Reale Estate</a></li>
+                        <li class="breadcrumb-item active">Listing Grid</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-xxl-3" id="propertyFilters" style="display: none;">
+            <div class="card mb-0">
+                <div data-simplebar="init">
+                    <div class="simplebar-wrapper" style="margin: 0px;">
+                        <div class="simplebar-height-auto-observer-wrapper">
+                            <div class="simplebar-height-auto-observer"></div>
+                        </div>
+                        <div class="simplebar-mask">
+                            <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                    aria-label="scrollable content" style="height: auto; overflow: hidden;">
+                                    <div class="simplebar-content" style="padding: 0px;">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h4 class="card-title flex-grow-1 mb-0">Filters</h4>
+                                            <div class="flex-shrink-0">
+                                                <button class="btn btn-subtle-secondary btn-icon btn-sm myButton"><i
+                                                        class="bi bi-chevron-left"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <p class="text-muted fw-medium text-uppercase mb-3">Location</p>
+                                                <div class="choices" data-type="select-one" tabindex="0" role="combobox"
+                                                    aria-autocomplete="list" aria-haspopup="true" aria-expanded="false">
+                                                    <div class="choices__inner"><select
+                                                            class="form-select choices__input" id="select-location"
+                                                            hidden="" tabindex="-1" data-choice="active">
+                                                            <option value="Select Location"
+                                                                data-custom-properties="[object Object]">Select Location
+                                                            </option>
+                                                        </select>
+                                                        <div class="choices__list choices__list--single">
+                                                            <div class="choices__item choices__item--selectable"
+                                                                data-item="" data-id="1" data-value="Select Location"
+                                                                data-custom-properties="[object Object]"
+                                                                aria-selected="true">Select Location</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="choices__list choices__list--dropdown"
+                                                        aria-expanded="false"><input type="search" name="search_terms"
+                                                            class="choices__input choices__input--cloned"
+                                                            autocomplete="off" autocapitalize="off" spellcheck="false"
+                                                            role="textbox" aria-autocomplete="list" aria-label="null"
+                                                            placeholder="">
+                                                        <div class="choices__list" role="listbox">
+                                                            <div id="choices--select-location-item-choice-1"
+                                                                class="choices__item choices__item--choice choices__item--selectable is-highlighted"
+                                                                role="option" data-choice="" data-id="1"
+                                                                data-value="Australia"
+                                                                data-select-text="Press to select"
+                                                                data-choice-selectable="" aria-selected="true">Australia
+                                                            </div>
+                                                            <div id="choices--select-location-item-choice-2"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="2"
+                                                                data-value="Belgium" data-select-text="Press to select"
+                                                                data-choice-selectable="">Belgium</div>
+                                                            <div id="choices--select-location-item-choice-3"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="3"
+                                                                data-value="Brazil" data-select-text="Press to select"
+                                                                data-choice-selectable="">Brazil</div>
+                                                            <div id="choices--select-location-item-choice-4"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="4"
+                                                                data-value="China" data-select-text="Press to select"
+                                                                data-choice-selectable="">China</div>
+                                                            <div id="choices--select-location-item-choice-5"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="5"
+                                                                data-value="Denmark" data-select-text="Press to select"
+                                                                data-choice-selectable="">Denmark</div>
+                                                            <div id="choices--select-location-item-choice-6"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="6"
+                                                                data-value="Greenland"
+                                                                data-select-text="Press to select"
+                                                                data-choice-selectable="">Greenland</div>
+                                                            <div id="choices--select-location-item-choice-7"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="7"
+                                                                data-value="Jersey" data-select-text="Press to select"
+                                                                data-choice-selectable="">Jersey</div>
+                                                            <div id="choices--select-location-item-choice-8"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="8"
+                                                                data-value="Mexico" data-select-text="Press to select"
+                                                                data-choice-selectable="">Mexico</div>
+                                                            <div id="choices--select-location-item-choice-9"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="9"
+                                                                data-value="Saudi Arabia"
+                                                                data-select-text="Press to select"
+                                                                data-choice-selectable="">Saudi Arabia</div>
+                                                            <div id="choices--select-location-item-choice-10"
+                                                                class="choices__item choices__item--choice is-selected choices__item--selectable"
+                                                                role="option" data-choice="" data-id="10"
+                                                                data-value="Select Location"
+                                                                data-select-text="Press to select"
+                                                                data-choice-selectable="">Select Location</div>
+                                                            <div id="choices--select-location-item-choice-11"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="11"
+                                                                data-value="Serbia" data-select-text="Press to select"
+                                                                data-choice-selectable="">Serbia</div>
+                                                            <div id="choices--select-location-item-choice-12"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="12"
+                                                                data-value="United Kingdom"
+                                                                data-select-text="Press to select"
+                                                                data-choice-selectable="">United Kingdom</div>
+                                                            <div id="choices--select-location-item-choice-13"
+                                                                class="choices__item choices__item--choice choices__item--selectable"
+                                                                role="option" data-choice="" data-id="13"
+                                                                data-value="United States"
+                                                                data-select-text="Press to select"
+                                                                data-choice-selectable="">United States</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <p class="text-muted fw-medium text-uppercase mb-3">Property Type</p>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <div>
+                                                        <input type="radio" class="btn-check" name="propertyType"
+                                                            value="Villa" id="propertyType1" checked="">
+                                                        <label
+                                                            class="btn btn-ghost-primary fs-lg avatar-xs p-0 d-flex justify-content-center align-items-center"
+                                                            for="propertyType1" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-trigger="hover"
+                                                            data-bs-title="Villa">
+                                                            <i class="bi bi-house"></i>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input type="radio" class="btn-check" name="propertyType"
+                                                            value="Apartment" id="propertyType3">
+                                                        <label
+                                                            class="btn btn-ghost-primary fs-lg avatar-xs p-0 d-flex justify-content-center align-items-center"
+                                                            for="propertyType3" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-trigger="hover"
+                                                            data-bs-title="Apartment">
+                                                            <i class="bi bi-building"></i>
+                                                        </label>
+                                                    </div>
+
+                                                    <div>
+                                                        <input type="radio" class="btn-check" name="propertyType"
+                                                            value="Residency" id="propertyType4">
+                                                        <label
+                                                            class="btn btn-ghost-primary fs-lg avatar-xs p-0 d-flex justify-content-center align-items-center"
+                                                            for="propertyType4" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-trigger="hover"
+                                                            data-bs-title="Residency">
+                                                            <i class="bi bi-buildings"></i>
+                                                        </label>
+                                                    </div>
+
+                                                    <div>
+                                                        <input type="radio" class="btn-check" name="propertyType"
+                                                            value="all" id="propertyType5">
+                                                        <label
+                                                            class="btn btn-ghost-primary fs-lg avatar-xs p-0 d-flex justify-content-center align-items-center"
+                                                            for="propertyType5" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-trigger="hover"
+                                                            data-bs-title="all"><i class="bi bi-hospital"></i></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <p class="text-muted fw-medium text-uppercase mb-3">Bedroom</p>
+                                                <div class="row gy-3" id="bedroom-filter">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="all"
+                                                                id="allselectBedroom">
+                                                            <label class="form-check-label" for="allselectBedroom">
+                                                                Select All
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="2"
+                                                                id="twoBedroom" checked="">
+                                                            <label class="form-check-label" for="twoBedroom">
+                                                                2 Bedroom
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="3"
+                                                                id="threeBedroom">
+                                                            <label class="form-check-label" for="threeBedroom">
+                                                                3 Bedroom
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="4"
+                                                                id="fourBedroom">
+                                                            <label class="form-check-label" for="fourBedroom">
+                                                                4 Bedroom
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="5"
+                                                                id="fiveBedroom" checked="">
+                                                            <label class="form-check-label" for="fiveBedroom">
+                                                                5 Bedroom
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                </div><!--end row-->
+                                            </div><!--end -->
+
+                                            <div class="mb-4">
+                                                <p class="text-muted fw-medium text-uppercase mb-3">Price Range</p>
+                                                <div>
+                                                    <div id="product-price-range" data-slider-color="secondary"
+                                                        class="noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr">
+                                                        <div class="noUi-base">
+                                                            <div class="noUi-connects">
+                                                                <div class="noUi-connect noUi-draggable"
+                                                                    style="transform: translate(10%, 0px) scale(0.66, 1);">
+                                                                </div>
+                                                            </div>
+                                                            <div class="noUi-origin"
+                                                                style="transform: translate(-90%, 0px); z-index: 5;">
+                                                                <div class="noUi-handle noUi-handle-lower"
+                                                                    data-handle="0" tabindex="0" role="slider"
+                                                                    aria-orientation="horizontal" aria-valuemin="0.0"
+                                                                    aria-valuemax="3780.0" aria-valuenow="500.0"
+                                                                    aria-valuetext="$ 500">
+                                                                    <div class="noUi-touch-area"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noUi-origin"
+                                                                style="transform: translate(-24%, 0px); z-index: 4;">
+                                                                <div class="noUi-handle noUi-handle-upper"
+                                                                    data-handle="1" tabindex="0" role="slider"
+                                                                    aria-orientation="horizontal" aria-valuemin="520.0"
+                                                                    aria-valuemax="5000.0" aria-valuenow="3800.0"
+                                                                    aria-valuetext="$ 3800">
+                                                                    <div class="noUi-touch-area"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="formCost d-flex gap-2 align-items-center mt-4">
+                                                        <input class="form-control" type="text" id="minCost" value="0">
+                                                        <span class="fw-semibold text-muted">to</span> <input
+                                                            class="form-control" type="text" id="maxCost" value="1000">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <p class="text-muted fw-medium text-uppercase mb-3">Bathroom</p>
+                                                <div class="row gy-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="allselectBathroom">
+                                                            <label class="form-check-label" for="allselectBathroom">
+                                                                Select All
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="twoBathroom" checked="">
+                                                            <label class="form-check-label" for="twoBathroom">
+                                                                2 Bathroom
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="threeBathroom">
+                                                            <label class="form-check-label" for="threeBathroom">
+                                                                3 Bathroom
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="fourBathroom">
+                                                            <label class="form-check-label" for="fourBathroom">
+                                                                4 Bathroom
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="fiveBathroom" checked="">
+                                                            <label class="form-check-label" for="fiveBathroom">
+                                                                5 Bathroom
+                                                            </label>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                </div><!--end row-->
+                                            </div><!--end -->
+                                            <!--end -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+                    </div>
+                    <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                        <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                    </div>
+                    <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                        <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center gy-3">
+                        <div class="col-sm-3">
+                            <h6 class="card-title mb-0">Property <span
+                                    class="badge bg-secondary-subtle text-secondary align-baseline ms-1">241</span></h6>
+                        </div><!--end col-->
+                        <div class="col-sm-auto ms-sm-auto">
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addProperty"><i
+                                    class="bi bi-house align-baseline me-1"></i> Add Property</button>
+                            <button class="btn btn-primary myButton"><i class="bi bi-funnel align-baseline me-1"></i>
+                                Filter</button>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+            </div>
+
+            <div class="row" id="property-list">
+
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6">
+                    <div class="card real-estate-grid-widgets card-animate">
+                        <div class="card-body p-2"> <img src="{{ url_for('static', filename='images/19.png') }}"
+                                width="50" height="50" alt="20.png" class="rounded w-100 object-fit-cover"
+                                style="height: 180px"> <button type="button"
+                                class="btn btn-subtle-warning custom-toggle btn-icon btn-sm " data-bs-toggle="button">
+                                <span class="icon-on"><i class="bi bi-star"></i></span> <span class="icon-off"><i
+                                        class="bi bi-star-fill"></i></span> </button>
+                            <div class="dropdown dropdown-real-estate"> <button class="btn btn-light btn-icon btn-sm"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                        class="bi bi-three-dots-vertical"></i> </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item edit-list" href="#addProperty" data-edit-id="10"
+                                            data-bs-toggle="modal"><i
+                                                class="bi bi-pencil-square me-1 align-baseline"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-list" href="#deleteRecordModal"
+                                            data-remove-id="10" data-bs-toggle="modal"><i
+                                                class="bi bi-trash3 me-1 align-baseline"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="text-muted float-end mb-0"><i
+                                    class="bi bi-star text-warning align-baseline me-1"></i> 4.5</p> <span
+                                class="badge bg-success-subtle text-success fs-xxs mb-3"><i
+                                    class="bi bi-buildings align-baseline me-1"></i>Residency</span> <a
+                                href="/apps/real-estate/property_overview">
+                                <h6 class="fs-lg text-capitalize text-truncate">Classic White House</h6>
+                            </a>
+                            <p class="text-muted"><i class="bi bi-geo-alt align-baseline me-1"></i> Minas Gerais, Brazil
+                            </p>
+                            <ul class="d-flex align-items-center gap-2 flex-wrap list-unstyled">
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-house align-baseline text-primary me-1"></i> 3 Bedroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="ph ph-bathtub align-middle text-primary me-1"></i> 2 Bathroom</p>
+                                </li>
+                                <li>
+                                    <p class="text-muted mb-0"><i
+                                            class="bi bi-columns align-baseline text-primary me-1"></i> 1324 sqft</p>
+                                </li>
+                            </ul>
+                            <div
+                                class="border-top border-dashed mt-3 pt-3 d-flex align-items-center justify-content-between gap-3">
+                                <h5 class="mb-0">$3698.99</h5> <a href="/apps/real-estate/property_overview"
+                                    class="link-effect">Read More <i
+                                        class="bi bi-chevron-right align-baseline ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--end row-->
+
+            <div class="row align-items-center mb-4 justify-content-between text-center text-sm-start"
+                id="pagination-element" style="display: flex;">
+                <div class="col-sm">
+                    <div class="text-muted">
+                        Showing <span class="fw-semibold">8</span> of <span class="fw-semibold">13</span> Results
+                    </div>
+                </div>
+                <div class="col-sm-auto  mt-3 mt-sm-0">
+                    <div
+                        class="pagination-block pagination pagination-separated justify-content-center justify-content-sm-end mb-sm-0">
+                        <div class="page-item disabled">
+                            <a href="javascript:void(0);" class="page-link" id="page-prev">Previous</a>
+                        </div>
+                        <span id="page-num" class="pagination">
+                            <div class="page-item active"><a class="page-link clickPageNumber"
+                                    href="javascript:void(0);">1</a></div>
+                            <div class="page-item"><a class="page-link clickPageNumber" href="javascript:void(0);">2</a>
+                            </div>
+                        </span>
+                        <div class="page-item">
+                            <a href="javascript:void(0);" class="page-link" id="page-next">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="noresult" class="d-none">
+                <div class="text-center py-4">
+                    <div class="avatar-md mx-auto mb-4">
+                        <div class="avatar-title bg-light text-primary rounded-circle fs-4xl">
+                            <i class="bi bi-search"></i>
+                        </div>
+                    </div>
+                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock content %}
+
+{% block extra_content %}
+
+<!-- Modal -->
+<div class="modal fade" id="addAmount" tabindex="-1" aria-labelledby="addAmountLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="addAmountLabel">Add Amount</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="#!">
+                    <div class="row g-3">
+                        <div class="col-lg-12">
+                            <div>
+                                <label for="AmountInput" class="form-label">Amount</label>
+                                <input type="number" class="form-control" id="AmountInput" placeholder="$000.00">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">Select Method</label>
+                            <div class="row g-3">
+                                <div class="col-lg-4">
+                                    <label class="border rounded w-100 form-label p-2">
+                                        <input class="form-check-input me-1" name="exampleRadios" type="radio" value=""
+                                            checked>
+                                        Visa
+                                    </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="border rounded w-100 form-label p-2">
+                                        <input class="form-check-input me-1" name="exampleRadios" type="radio" value="">
+                                        Mastercard
+                                    </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="border rounded w-100 form-label p-2">
+                                        <input class="form-check-input me-1" name="exampleRadios" type="radio" value="">
+                                        Credit Card
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div>
+                                <label for="cardNumber" class="form-label">Card Number</label>
+                                <input type="number" class="form-control" id="cardNumber"
+                                    placeholder="xxxx xxxx xxxx xxxx">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div>
+                                <label for="cvv/cvc" class="form-label">CVV/CVC</label>
+                                <input type="number" class="form-control" id="cvv/cvc" placeholder="***">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div>
+                                <label for="cardHoldersName" class="form-label">Cardholders Name</label>
+                                <input type="text" class="form-control" id="cardHoldersName" placeholder="Enter name">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-ghost-danger" data-bs-dismiss="modal"><i
+                        class="ph-x align-middle"></i> Close</button>
+                <button type="button" class="btn btn-primary">Add Amount</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Modal -->
+
+<!-- Product Modal -->
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 overflow-hidden">
+            <div class="modal-body p-0 ribbon-box">
+                <div class="ribbon ribbon-danger ribbon-shape trending-ribbon">
+                    <span class="trending-ribbon-text">Trending</span> <i
+                        class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
+                </div>
+                <div class="row g-0">
+                    <div class="col-lg-5">
+                        <div class="bg-primary-subtle p-5 h-100">
+                            <div class="p-lg-4">
+                                <img src="{{url_for('static' ,filename='images/products/img-3.png')}}" alt=""
+                                    class="img-fluid">
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-lg-7">
+                        <div class="p-4 h-100">
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            <a href="#!">
+                                <h5 class="mb-1">Craft Women Black Sling Bag</h5>
+                            </a>
+                            <p class="text-muted">Fashion & Clothing</p>
+
+                            <h5 class="mb-3">$199.99 <del class="text-muted fs-sm fw-normal">$299.99</del></h5>
+
+                            <ul class="list-unstyled hstack gap-2 mb-4">
+                                <li>
+                                    Available Colors
+                                </li>
+                                <li>
+                                    <div class="avatar-xxs">
+                                        <div class="avatar-title rounded bg-primary-subtle"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="avatar-xxs">
+                                        <div class="avatar-title rounded bg-success-subtle"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="avatar-xxs">
+                                        <div class="avatar-title rounded bg-danger-subtle"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="avatar-xxs">
+                                        <div class="avatar-title rounded bg-dark-subtle"></div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <ul class="list-unstyled vstack gap-2 mb-4">
+                                <li class=""><i class="bi bi-check2-circle me-2 align-middle text-success"></i>In stock
+                                </li>
+                                <li class=""><i class="bi bi-check2-circle me-2 align-middle text-success"></i>Free
+                                    delivery available</li>
+                                <li class=""><i class="bi bi-check2-circle me-2 align-middle text-success"></i>Sales 10%
+                                    Off Use Code: <b>STEEX10</b></li>
+                            </ul>
+
+                            <div class="hstack gap-2 justify-content-end">
+                                <button class="btn btn-primary"><i class="bi bi-cart align-baseline me-1"></i> Add To
+                                    Cart</button>
+                                <button class="btn btn-subtle-secondary">View Details <i
+                                        class="bi bi-arrow-right align-baseline ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Product Modal -->
+{% endblock extra_content %}
+
+{% block extra_js %}
+
+<!-- apexcharts -->
+<script src="{{url_for('static', filename='libs/apexcharts/apexcharts.min.js')}}"></script>
+
+<!-- Vector map-->
+<script src="{{url_for('static', filename='libs/jsvectormap/js/jsvectormap.min.js')}}"></script>
+<script src="{{url_for('static', filename='libs/jsvectormap/maps/world-merc.js')}}"></script>
+
+<!--Swiper slider js-->
+<script src="{{url_for('static', filename='libs/swiper/swiper-bundle.min.js')}}"></script>
+
+<script src="{{url_for('static', filename='libs/list.js/list.min.js')}}"></script>
+
+<!-- Dashboard init -->
+<script src="{{url_for('static', filename='js/pages/dashboard-ecommerce.init.js')}}"></script>
+
+{% endblock extra_js %}

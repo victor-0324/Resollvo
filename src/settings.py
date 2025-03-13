@@ -21,5 +21,4 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     """Ambiente de produção"""
-
     DEBUG = False

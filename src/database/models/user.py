@@ -1,9 +1,9 @@
 import re
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Enum, DECIMAL, Boolean
+from sqlalchemy.orm import relationship
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
 from src.database import Base 
 
 class User(UserMixin, Base):
@@ -81,7 +81,6 @@ class User(UserMixin, Base):
     def __repr__(self):
         return f"<User {self.name} - {self.role}>"
 
-
 class AffiliateDetail(Base):
     """Tabela para armazenar detalhes específicos dos afiliados."""
     __tablename__ = "affiliate_details"
@@ -98,7 +97,6 @@ class AffiliateDetail(Base):
     def __repr__(self):
         return f"<Affiliate {self.company_name} - {self.region}>"
 
-
 class Service(Base):
     """Tabela de serviços oferecidos pelos afiliados."""
     __tablename__ = "services"
@@ -112,3 +110,39 @@ class Service(Base):
 
     def __repr__(self):
         return f"<Service {self.title} - R$ {self.price / 100:.2f}>"
+
+class Order(Base):
+    """Tabela de Pedidos"""
+    __tablename__ = "orders"
+
+    id = Column(Integer, primary_key=True)
+    client_id = Column(Integer, ForeignKey("users.id"), nullable=False)  # Cliente que fez o pedido
+    service_id = Column(Integer, ForeignKey("services.id"), nullable=False)  # Serviço adquirido
+    affiliate_id = Column(Integer, ForeignKey("users.id"), nullable=False)  # Afiliado que ofereceu o serviço
+    order_date = Column(DateTime, default=datetime.utcnow)
+    status = Column(Enum("pending", "paid", "cancelled"), default="pending")  # Status do pedido
+    total = Column(DECIMAL(10, 2), nullable=False)  # Valor total do pedido
+
+    client = relationship("User", foreign_keys=[client_id])  # Cliente que fez o pedido
+    affiliate = relationship("User", foreign_keys=[affiliate_id])  # Afiliado que receberá o pagamento
+    service = relationship("Service")  # Serviço adquirido
+
+    def __repr__(self):
+        return f"<Order {self.id} - Status: {self.status}>" 
+    
+class Payment(Base):
+    """Tabela de Pagamentos"""
+    __tablename__ = "payments"
+
+    id = Column(Integer, primary_key=True)
+    order_id = Column(Integer, ForeignKey("orders.id"), nullable=False)  # Pedido relacionado
+    payment_method = Column(Enum("paypal", "pix", "credit_card", "boleto"), nullable=False)  # Método de pagamento
+    transaction_id = Column(String(255), unique=True, nullable=True)  # ID da transação no gateway de pagamento
+    amount = Column(DECIMAL(10, 2), nullable=False)  # Valor pago
+    status = Column(Enum("pending", "approved", "failed"), default="pending")  # Status do pagamento
+    payment_date = Column(DateTime, default=datetime.utcnow)  # Data do pagamento
+
+    order = relationship("Order")  # Relacionamento com o pedido
+
+    def __repr__(self):
+        return f"<Payment {self.id} - {self.payment_method} - Status: {self.status}>"
